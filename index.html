@@ -17,6 +17,23 @@
       background: #003366;
       color: #fff;
       padding: 1rem 0;
+      /* Remove text-align center for flex layout */
+    }
+    .header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+    .logo {
+      height: 60px;
+      width: auto;
+      background: #fff;
+      border-radius: 6px;
+      padding: 2px 6px;
+    }
+    .header-center {
+      flex: 1;
       text-align: center;
     }
     nav {
@@ -57,8 +74,14 @@
 </head>
 <body>
   <header>
-    <h1>KING Manufacturing Lab</h1>
-    <p>University of Maine | Department of Mechanical Engineering</p>
+    <div class="header-flex">
+      <img src="images/UMaine_logo.png" alt="UMaine Logo" class="logo left-logo">
+      <div class="header-center">
+        <h1>KING Manufacturing Lab</h1>
+        <p>University of Maine | Department of Mechanical Engineering</p>
+      </div>
+      <img src="images/lab_logo.png" alt="Lab Logo" class="logo right-logo">
+    </div>
   </header>
 
   <nav>
@@ -71,7 +94,7 @@
 
   <div class="container" id="home">
     <h2>Welcome</h2>
-    <p>The KING Manufacturing Lab focuses on advancing additive manufacturing, casting, and hybrid manufacturing methods to enable the next generation of sustainable and high-performance materials and products. We are part of the Advanced Structures and Composites Center at the University of Maine.</p>
+    <p>The KING Manufacturing Lab focuses on advancing additive manufacturing, casting, and hybrid manufacturing methods to enable the next generation of sustainable and high-performance materials and[...]
   </div>
 
   <div class="container" id="people">
