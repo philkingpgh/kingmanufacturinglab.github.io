@@ -10,14 +10,13 @@
       margin: 0;
       padding: 0;
       line-height: 1.6;
-      background-color: #f8f9fa;
-      color: #333;
+      background-color: #003366; /* Match header background */
+      color: #fff; /* Adjust text for dark background */
     }
     header {
       background: #003366;
       color: #fff;
       padding: 1rem 0;
-      /* Remove text-align center for flex layout */
     }
     .header-flex {
       display: flex;
@@ -26,11 +25,16 @@
       padding: 0 2rem;
     }
     .logo {
-      height: 100px;
+      height: 60px; /* Default logo size */
       width: auto;
-      background: #003366;
       border-radius: 6px;
       padding: 2px 6px;
+    }
+    .right-logo {
+      height: 140px; /* Larger right logo */
+      background: #fff;
+      /* Optionally: add a subtle box-shadow for contrast */
+      box-shadow: 0 0 8px rgba(0,0,0,0.10);
     }
     .header-center {
       flex: 1;
@@ -56,12 +60,13 @@
       max-width: 1100px;
       margin: 2rem auto;
       background: #fff;
+      color: #333;
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h1, h2 {
-      color: #003366;
+      color: #fff;
     }
     footer {
       text-align: center;
@@ -75,12 +80,12 @@
 <body>
   <header>
     <div class="header-flex">
-      <img src="UMaine_logo.png" alt="UMaine Logo" class="logo left-logo">
+      <img src="images/UMaine_logo.png" alt="UMaine Logo" class="logo left-logo">
       <div class="header-center">
         <h1>KING Manufacturing Lab</h1>
         <p>University of Maine | Department of Mechanical Engineering</p>
       </div>
-      <img src="lab_logo.png" alt="Lab Logo" class="logo right-logo">
+      <img src="images/lab_logo.png" alt="Lab Logo" class="logo right-logo">
     </div>
   </header>
 
