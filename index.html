@@ -52,11 +52,11 @@
     .btn-ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); margin-left: 1rem; }
     .btn-ghost:hover { background: var(--accent-lt); transform: translateY(-1px); }
 
-    .hero-visual { background: var(--cream); display: flex; flex-direction: column; justify-content: space-between; padding: 4rem 3vw 3rem; position: relative; overflow: hidden; }
+    .hero-visual { background: var(--cream); display: flex; flex-direction: column; justify-content: space-between; padding: 3rem 3vw 3rem; position: relative; overflow: hidden; }
     .hero-pattern { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, var(--rule) 39px, var(--rule) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, var(--rule) 39px, var(--rule) 40px); opacity: 0.5; }
-    .hero-lab-logo { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 0; }
-    .hero-lab-logo img { max-width: 260px; max-height: 180px; width: 100%; object-fit: contain; }
-    .hero-stats { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .hero-lab-logo { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; flex: 1; padding: 1.5rem 1rem; }
+    .hero-lab-logo img { width: 85%; max-width: 420px; height: auto; object-fit: contain; }
+    .hero-stats { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; flex-shrink: 0; }
     .stat-card { background: var(--paper); border: 1px solid var(--rule); padding: 1.25rem 1.5rem; border-radius: 2px; }
     .stat-num { font-family: var(--serif); font-size: 2.5rem; color: var(--ink); line-height: 1; margin-bottom: 0.4rem; }
     .stat-label { font-size: 0.8rem; color: var(--ink-muted); letter-spacing: 0.04em; }
@@ -125,16 +125,36 @@
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-text { border-right: none; border-bottom: 1px solid var(--rule); }
-      .hero-visual { min-height: 320px; }
+      .hero-text { border-right: none; border-bottom: 1px solid var(--rule); padding: 4rem 6vw; }
+      .hero-visual { min-height: 400px; padding: 2.5rem 6vw; }
       .research-grid { grid-template-columns: 1fr 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
       .pub-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .pub-link { margin-top: 0.5rem; }
     }
     @media (max-width: 600px) {
+      nav { padding: 0 4vw; height: 60px; }
+      .nav-logo-text { font-size: 0.9rem; }
+      .nav-left img { height: 28px; }
       .nav-links { display: none; }
+      .hero-text { padding: 3rem 5vw; }
+      .hero-text h1 { font-size: 2rem; }
+      .hero-text p { font-size: 0.95rem; }
+      .btn { padding: 0.65rem 1.25rem; font-size: 0.82rem; }
+      .btn-ghost { margin-left: 0.6rem; }
+      .hero-visual { min-height: 360px; padding: 2rem 5vw; }
+      .hero-stats { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+      .stat-num { font-size: 2rem; }
+      section { padding: 3.5rem 5vw; }
       .research-grid { grid-template-columns: 1fr; }
-      section { padding: 4rem 5vw; }
+      .people-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1.25rem; }
+      .pub-item { padding: 1.1rem 1.25rem; }
+      .pub-year { font-size: 0.85rem; }
+      .pub-title { font-size: 0.88rem; }
+      .pub-authors { font-size: 0.78rem; }
+      .contact-form-area { padding: 1.5rem; }
+      footer { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .footer-left { flex-wrap: wrap; }
     }
 
     /* ANIMATIONS */
@@ -218,8 +238,8 @@
     </div>
     <div class="research-card">
       <span class="research-tag">New AM Processes</span>
-      <h3>Single-Nozzle Binder Jet Additive Manufacturing</h3>
-      <p>Traditional binder jetting relies on expensive, clog-prone printhead arrays. We are replacing this with a single variable-width nozzle that preserves the resolution and speed of binder jetting while dramatically improving reliability and reducing cost.</p>
+      <h3>Binder Jet Additive Manufacturing</h3>
+      <p>Binder jetting is a versatile powder-bed AM process capable of producing complex geometries in metals, ceramics, and sand. Our research investigates binder deposition strategies, powder-binder interactions, and process parameter optimization to improve part quality, expand printable material systems, and reduce the cost and complexity of binder jet systems.</p>
     </div>
     <div class="research-card">
       <span class="research-tag">Process Modeling</span>
