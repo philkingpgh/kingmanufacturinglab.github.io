@@ -1,136 +1,490 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KING Manufacturing Lab</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KING Manufacturing Lab — University of Maine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
   <style>
-    body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-  background-color: #3698D4; /* Lighter UMaine blue */
-  color: #fff; /* Adjust text for dark background */
-  }
-    header {
-      background: #3698D4;
-      color: #fff;
-      padding: 1rem 0;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #1a1a1a;
+      --ink-muted: #5c5c5c;
+      --ink-light: #9a9a9a;
+      --paper:     #faf8f4;
+      --cream:     #f0ece4;
+      --rule:      #ddd8cf;
+      --accent:    #1f4d8a;
+      --accent-lt: #e6edf8;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans:  'DM Sans', system-ui, sans-serif;
     }
-    .header-flex {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-    }
-    .logo {
-      height: 140px; /* Default logo size */
-      width: auto;
-      border-radius: 6px;
-      padding: 2px 6px;
-    }
-    .right-logo {
-      height: 140px; /* Larger right logo */
-      background: #fff;
-      /* Optionally: add a subtle box-shadow for contrast */
-      box-shadow: 0 0 8px rgba(0,0,0,0.10);
-    }
-    .header-center {
-      flex: 1;
-      text-align: center;
-    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.7; }
+
+    /* NAV */
     nav {
-      background: #003263;
-      display: flex;
-      justify-content: center;
-      padding: 0.5rem;
+      position: sticky; top: 0; z-index: 100;
+      background: var(--paper); border-bottom: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 68px;
     }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 1rem;
-      font-weight: bold;
+    .nav-left { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+    .nav-left img { height: 36px; width: auto; display: block; }
+    .nav-logo-text { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); letter-spacing: 0.01em; }
+    .nav-divider { width: 1px; height: 28px; background: var(--rule); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.875rem; color: var(--ink-muted); letter-spacing: 0.03em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 88vh; overflow: hidden; }
+    .hero-text { display: flex; flex-direction: column; justify-content: center; padding: 6rem 5vw; border-right: 1px solid var(--rule); }
+    .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+    .hero-text h1 { font-family: var(--serif); font-size: clamp(2.4rem, 4.5vw, 3.8rem); line-height: 1.15; color: var(--ink); margin-bottom: 1.5rem; }
+    .hero-text h1 em { font-style: italic; color: var(--accent); }
+    .hero-text p { font-size: 1.05rem; color: var(--ink-muted); max-width: 460px; line-height: 1.8; margin-bottom: 2.5rem; }
+    .btn { display: inline-block; padding: 0.75rem 1.75rem; background: var(--accent); color: #fff; text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.03em; border-radius: 2px; transition: background 0.2s, transform 0.15s; }
+    .btn:hover { background: #163a6b; transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); margin-left: 1rem; }
+    .btn-ghost:hover { background: var(--accent-lt); transform: translateY(-1px); }
+
+    .hero-visual { background: var(--cream); display: flex; flex-direction: column; justify-content: space-between; padding: 4rem 3vw 3rem; position: relative; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, var(--rule) 39px, var(--rule) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, var(--rule) 39px, var(--rule) 40px); opacity: 0.5; }
+    .hero-lab-logo { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 0; }
+    .hero-lab-logo img { max-width: 260px; max-height: 180px; width: 100%; object-fit: contain; }
+    .hero-stats { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card { background: var(--paper); border: 1px solid var(--rule); padding: 1.25rem 1.5rem; border-radius: 2px; }
+    .stat-num { font-family: var(--serif); font-size: 2.5rem; color: var(--ink); line-height: 1; margin-bottom: 0.4rem; }
+    .stat-label { font-size: 0.8rem; color: var(--ink-muted); letter-spacing: 0.04em; }
+
+    /* SECTIONS */
+    section { padding: 6rem 5vw; }
+    .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3.5rem; border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+    .section-header h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.5rem); color: var(--ink); }
+    .section-num { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); }
+
+    /* RESEARCH */
+    #research { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--rule); border: 1.5px solid var(--rule); }
+    .research-card { background: var(--cream); padding: 2rem; transition: background 0.2s; }
+    .research-card:hover { background: var(--paper); }
+    .research-tag { display: inline-block; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: var(--accent-lt); padding: 3px 10px; border-radius: 1px; margin-bottom: 1rem; }
+    .research-card h3 { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 0.75rem; line-height: 1.3; }
+    .research-card p { font-size: 0.9rem; color: var(--ink-muted); line-height: 1.7; }
+
+    /* PEOPLE */
+    .people-section-title { font-family: var(--serif); font-size: 1.1rem; color: var(--ink-muted); margin: 2.5rem 0 1.25rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--rule); }
+    .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.75rem; }
+    .person-card { text-align: center; }
+    .person-avatar { width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 0.9rem; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1.5rem; color: var(--accent); background: var(--accent-lt); border: 2px solid var(--rule); }
+    .person-name { font-weight: 500; font-size: 0.92rem; margin-bottom: 0.2rem; }
+    .person-role { font-size: 0.78rem; color: var(--ink-muted); }
+    .person-links { margin-top: 0.4rem; display: flex; justify-content: center; gap: 0.75rem; }
+    .person-links a { font-size: 0.75rem; color: var(--accent); text-decoration: none; }
+    .person-links a:hover { text-decoration: underline; }
+
+    /* PUBLICATIONS */
+    #publications { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .pub-list { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1.5px solid var(--rule); }
+    .pub-item { background: var(--cream); padding: 1.4rem 2rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: start; transition: background 0.15s; }
+    .pub-item:hover { background: var(--paper); }
+    .pub-year { font-family: var(--serif); font-size: 1.05rem; color: var(--ink-light); width: 3.5rem; padding-top: 2px; }
+    .pub-title { font-size: 0.93rem; font-weight: 500; margin-bottom: 0.3rem; }
+    .pub-authors { font-size: 0.82rem; color: var(--ink-muted); margin-bottom: 0.25rem; }
+    .pub-journal { font-size: 0.79rem; color: var(--accent); font-style: italic; }
+    .pub-link { font-size: 0.78rem; color: var(--accent); text-decoration: none; white-space: nowrap; padding: 4px 12px; border: 1px solid var(--accent); border-radius: 1px; margin-top: 4px; display: inline-block; }
+    .pub-link:hover { background: var(--accent-lt); }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-info h3 { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 1rem; }
+    .contact-info p { color: var(--ink-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .contact-detail { display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.9rem; }
+    .contact-detail span { color: var(--ink-muted); font-size: 0.78rem; display: block; }
+    .contact-detail strong { color: var(--ink); font-weight: 500; }
+    .contact-form-area { background: var(--cream); border: 1.5px solid var(--rule); padding: 2rem; border-radius: 2px; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.4rem; }
+    .form-group input, .form-group textarea { width: 100%; padding: 0.65rem 0.9rem; border: 1px solid var(--rule); background: var(--paper); font-family: var(--sans); font-size: 0.9rem; color: var(--ink); border-radius: 2px; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { height: 120px; resize: vertical; }
+    .form-note { font-size: 0.78rem; color: var(--ink-light); margin-top: 0.75rem; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--rule); padding: 2rem 5vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-left { display: flex; align-items: center; gap: 16px; }
+    .footer-left img { height: 28px; width: auto; opacity: 0.7; }
+    .footer-text { font-size: 0.8rem; color: var(--ink-light); }
+    footer a { color: var(--ink-muted); text-decoration: none; font-size: 0.8rem; }
+    footer a:hover { color: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-text { border-right: none; border-bottom: 1px solid var(--rule); }
+      .hero-visual { min-height: 320px; }
+      .research-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .pub-item { grid-template-columns: 1fr; gap: 0.4rem; }
     }
-    nav a:hover {
-      text-decoration: underline;
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .research-grid { grid-template-columns: 1fr; }
+      section { padding: 4rem 5vw; }
     }
-    .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: 2rem auto;
-      background: #fff;
-      color: #333;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1, h2 {
-      color: #fff;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #003366;
-      color: #fff;
-      margin-top: 2rem;
-    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-text > * { animation: fadeUp 0.6s ease both; }
+    .hero-text > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero-text > *:nth-child(2) { animation-delay: 0.12s; }
+    .hero-text > *:nth-child(3) { animation-delay: 0.2s; }
+    .hero-text > *:nth-child(4) { animation-delay: 0.28s; }
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-flex">
-      <img src="UMaine_logo_dark_blue.png" alt="UMaine Logo" class="logo left-logo">
-      <div class="header-center">
-        <h1>KING Manufacturing Lab</h1>
-        <p>University of Maine | Department of Mechanical Engineering</p>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-left" href="#home">
+    <img src="UMaine_logo_dark_blue.png" alt="University of Maine" />
+    <div class="nav-divider"></div>
+    <span class="nav-logo-text">KING Manufacturing Lab</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#people">People</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home" style="padding:0;">
+  <div class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">University of Maine · Mechanical Engineering · Advanced Structures and Composites Center</p>
+      <h1>Knowledge and Innovation for <em>Next Generation</em> Manufacturing</h1>
+      <p>
+        The KING Manufacturing Lab develops affordable, accessible manufacturing processes that improve the efficiency and sustainability of making products — bridging advanced additive manufacturing with traditional processes like metal casting.
+      </p>
+      <div>
+        <a class="btn" href="#research">Our Research</a>
+        <a class="btn btn-ghost" href="#contact">Join the Lab</a>
       </div>
-      <img src="lab_logo.png" alt="Lab Logo" class="logo right-logo">
     </div>
-  </header>
-
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#people">People</a>
-    <a href="#research">Research</a>
-    <a href="#publications">Publications</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <div class="container" id="home">
-    <h2>Welcome</h2>
-    <p>The KING Manufacturing Lab focuses on advancing additive manufacturing, casting, and hybrid manufacturing methods to enable the next generation of sustainable and high-performance materials and[...]
+    <div class="hero-visual">
+      <div class="hero-pattern"></div>
+      <div class="hero-lab-logo">
+        <img src="lab_logo.png" alt="KING Manufacturing Lab Logo" />
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">11</div>
+          <div class="stat-label">Lab Members</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">8+</div>
+          <div class="stat-label">Journal Publications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">$3.8M+</div>
+          <div class="stat-label">Funded Research</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2023</div>
+          <div class="stat-label">Founded at UMaine</div>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="container" id="people">
-    <h2>People</h2>
-    <p><strong>Dr. Philip King</strong> – Assistant Professor, Mechanical Engineering<br>
-    Graduate and undergraduate researchers coming soon.</p>
-  </div>
-
-  <div class="container" id="research">
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-header">
+    <span class="section-num">01</span>
     <h2>Research</h2>
-    <ul>
-      <li>Additive Manufacturing of Metals and Polymers</li>
-      <li>Hybrid Casting Processes with Embedded Sensors</li>
-      <li>Large-Format Polymer Extrusion for Renewable Energy</li>
-      <li>Digital Twins for Manufacturing Systems</li>
-    </ul>
+  </div>
+  <div class="research-grid">
+    <div class="research-card">
+      <span class="research-tag">New AM Processes</span>
+      <h3>Extrusion Sand Printing for Metal Casting</h3>
+      <p>We are creating a novel process to extrusion-print sand and ceramics to indirectly manufacture large metal components — overcoming the cost and distortion barriers of large-format direct metal AM, and developing new mold materials that balance extrudability with castability.</p>
+    </div>
+    <div class="research-card">
+      <span class="research-tag">New AM Processes</span>
+      <h3>Single-Nozzle Binder Jet Additive Manufacturing</h3>
+      <p>Traditional binder jetting relies on expensive, clog-prone printhead arrays. We are replacing this with a single variable-width nozzle that preserves the resolution and speed of binder jetting while dramatically improving reliability and reducing cost.</p>
+    </div>
+    <div class="research-card">
+      <span class="research-tag">Process Modeling</span>
+      <h3>Modeling of AM Sand Mold Anisotropy</h3>
+      <p>AM parts are inherently anisotropic. We investigate how orientation-dependent density and surface roughness in printed molds affect metal flow and solidification, and integrate AI with simulation to enable generative design for AM sand molds.</p>
+    </div>
+    <div class="research-card">
+      <span class="research-tag">Process Modeling</span>
+      <h3>Fiber Distribution in Continuous Forming</h3>
+      <p>We study how processing parameters drive fiber migration and alignment in fiber-filled thermoplastic tapes — building predictive models to enable designed fiber alignment for lightweight, high-strength continuously formed structures.</p>
+    </div>
+    <div class="research-card">
+      <span class="research-tag">Large-Format AM</span>
+      <h3>Surface Enhancement for Large-Format AM Tooling</h3>
+      <p>Large-format polymer AM holds promise for reducing tooling lead time and cost across industries from metal casting to boat building. We investigate print strategies, self-leveling coatings, and cladding to improve surface quality and durability in service.</p>
+    </div>
+    <div class="research-card">
+      <span class="research-tag">Convergent Manufacturing</span>
+      <h3>Bridging Additive and Traditional Manufacturing</h3>
+      <p>Our overarching vision is convergent manufacturing — integrating additive manufacturing with traditional processes like sand casting and machining to create hybrid workflows that are more efficient, more sustainable, and more accessible than either approach alone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE -->
+<section id="people">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>People</h2>
   </div>
 
-  <div class="container" id="publications">
+  <p class="people-section-title">Principal Investigator</p>
+  <div class="people-grid">
+    <div class="person-card">
+      <div class="person-avatar">PK</div>
+      <div class="person-name">Dr. Philip King</div>
+      <div class="person-role">Assistant Professor, Mechanical Engineering</div>
+      <div class="person-links">
+        <a href="mailto:philip.king@maine.edu">Email</a>
+        <a href="#">Google Scholar</a>
+        <a href="#">CV</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="people-section-title">PhD Students</p>
+  <div class="people-grid">
+    <div class="person-card">
+      <div class="person-avatar">GK</div>
+      <div class="person-name">Gihun Kim</div>
+      <div class="person-role">PhD Student (exp. 2028)</div>
+      <div class="person-links"><a href="#">Email</a></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">SH</div>
+      <div class="person-name">S.U.M Rabbi Hossain</div>
+      <div class="person-role">PhD Student (exp. 2029)</div>
+      <div class="person-links"><a href="#">Email</a></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">CC</div>
+      <div class="person-name">Chiara Cardona</div>
+      <div class="person-role">PhD Student (exp. 2030)</div>
+      <div class="person-links"><a href="#">Email</a></div>
+    </div>
+  </div>
+
+  <p class="people-section-title">Master's Students</p>
+  <div class="people-grid">
+    <div class="person-card">
+      <div class="person-avatar">TM</div>
+      <div class="person-name">Timothy Moore</div>
+      <div class="person-role">M.S. Student (exp. 2026)</div>
+      <div class="person-links"><a href="#">Email</a></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">TK</div>
+      <div class="person-name">Trevor Knoedler</div>
+      <div class="person-role">M.S. Student (exp. 2026)</div>
+      <div class="person-links"><a href="#">Email</a></div>
+    </div>
+  </div>
+
+  <p class="people-section-title">Undergraduate Researchers</p>
+  <div class="people-grid">
+    <div class="person-card">
+      <div class="person-avatar">GH</div>
+      <div class="person-name">Gus Hoy</div>
+      <div class="person-role">Undergraduate (exp. 2026) · 2025 Goldwater Scholar</div>
+      <div class="person-links"><a href="#">Email</a></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">EM</div>
+      <div class="person-name">Eric Mabry</div>
+      <div class="person-role">Undergraduate (exp. 2026)</div>
+      <div class="person-links"><a href="#">Email</a></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">SR</div>
+      <div class="person-name">Sarah Rathbun</div>
+      <div class="person-role">Undergraduate (exp. 2027)</div>
+      <div class="person-links"><a href="#">Email</a></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">DS</div>
+      <div class="person-name">Daniel St. John</div>
+      <div class="person-role">Undergraduate (exp. 2027)</div>
+      <div class="person-links"><a href="#">Email</a></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">BM</div>
+      <div class="person-name">Benjamin Morgan</div>
+      <div class="person-role">Undergraduate (exp. 2027)</div>
+      <div class="person-links"><a href="#">Email</a></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">VD</div>
+      <div class="person-name">Veronika Davis</div>
+      <div class="person-role">Undergraduate (exp. 2028)</div>
+      <div class="person-links"><a href="#">Email</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-header">
+    <span class="section-num">03</span>
     <h2>Publications</h2>
-    <p>A selection of recent publications will be listed here. (You can embed a Google Scholar link.)</p>
   </div>
+  <div class="pub-list">
+    <div class="pub-item">
+      <div class="pub-year">2025</div>
+      <div>
+        <div class="pub-title">Density and Surface Texture Measurements of 3D Printed Sand to Improve Modeling</div>
+        <div class="pub-authors">Morris, S.* and King, P.</div>
+        <div class="pub-journal">International Journal of Metalcasting, 2025 · AFS Best Additive Manufacturing Paper Award</div>
+      </div>
+      <a class="pub-link" href="https://doi.org/10.1007/s40962-025-01675-8" target="_blank">DOI ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2025</div>
+      <div>
+        <div class="pub-title">Effect of Novel Riser Design Using 3D Sand-Printing on the Defects and Mechanical Performance of a Casting</div>
+        <div class="pub-authors">Shuvo, M.M., Skiadopoulos, M., Shahed, K.S., King, P., et al.</div>
+        <div class="pub-journal">Journal of Manufacturing Processes, 2025</div>
+      </div>
+      <a class="pub-link" href="https://doi.org/10.1016/j.jmapro.2024.12.061" target="_blank">DOI ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-title">Hands-on Digital Tools for Metalcasting Engineering Education in Foundry Science</div>
+        <div class="pub-authors">King, P., et al.</div>
+        <div class="pub-journal">International Journal of Metalcasting, 2024</div>
+      </div>
+      <a class="pub-link" href="https://doi.org/10.1007/s40962-024-01488-1" target="_blank">DOI ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-title">Optimal Design of AM Support Structures for EDM Removal from Build Plate</div>
+        <div class="pub-authors">Bicknell, G., Shahed, K., King, P., et al.</div>
+        <div class="pub-journal">International Journal of Advanced Manufacturing Technology, 2024</div>
+      </div>
+      <a class="pub-link" href="https://doi.org/10.1007/s00170-024-14660-y" target="_blank">DOI ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-title">Toward Reducing Casting Defects via 3D Risers via 3D Sand-Printing: A Simulation Study</div>
+        <div class="pub-authors">Shuvo, M., King, P., et al.</div>
+        <div class="pub-journal">International Journal of Metalcasting, 2024</div>
+      </div>
+      <a class="pub-link" href="https://doi.org/10.1007/s40962-024-01353-1" target="_blank">DOI ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-title">Novel Experimental Metal Flow Analysis Method for Sand Casting via Additive Manufacturing</div>
+        <div class="pub-authors">King, P. and Manogharan, G.</div>
+        <div class="pub-journal">International Journal of Metalcasting, 2023</div>
+      </div>
+      <a class="pub-link" href="https://doi.org/10.1007/s40962-023-00966-2" target="_blank">DOI ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-title">A Novel Approach to Visualize Liquid Aluminum Flow to Advance Casting Science</div>
+        <div class="pub-authors">Bate, C., King, P., Sim, J., and Manogharan, G.</div>
+        <div class="pub-journal">Materials, 2023</div>
+      </div>
+      <a class="pub-link" href="https://doi.org/10.3390/ma16020756" target="_blank">DOI ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-title">Effect of Freezing Range on Reducing Casting Defects through 3D Sand-Printed Mold Designs</div>
+        <div class="pub-authors">Martinez, D., King, P., Sama, S., Sim, J., Toykoc, H., and Manogharan, G.</div>
+        <div class="pub-journal">International Journal of Advanced Manufacturing Technology, 2023</div>
+      </div>
+      <a class="pub-link" href="https://doi.org/10.1007/s00170-023-11112-x" target="_blank">DOI ↗</a>
+    </div>
+  </div>
+  <p style="margin-top:1.5rem; font-size:0.85rem; color:var(--ink-muted);">
+    * Denotes lab advisee. Full list available on <a href="#" style="color:var(--accent);">Google Scholar</a>.
+  </p>
+</section>
 
-  <div class="container" id="contact">
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">04</span>
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:philip.king@maine.edu">philip.king@maine.edu</a><br>
-    Address: KING Manufacturing Lab, 116 Crosby Hall, University of Maine, Orono, ME 04469</p>
   </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Get in touch</h3>
+      <p>We are always looking for motivated graduate students, postdoctoral researchers, and collaborators. If you are interested in our work or in joining the lab, please reach out.</p>
+      <div class="contact-detail">
+        <div>
+          <span>Email</span>
+          <strong>philip.king@maine.edu</strong>
+        </div>
+        <div>
+          <span>Phone</span>
+          <strong>207-581-3052</strong>
+        </div>
+        <div>
+          <span>Office</span>
+          <strong>Ferland EEDC, Room 218</strong>
+        </div>
+        <div>
+          <span>Address</span>
+          <strong>Department of Mechanical Engineering<br>Advanced Structures and Composites Center<br>University of Maine, Long Rd.<br>Orono, ME 04469</strong>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-area">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" placeholder="Your full name" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about yourself and your interest in the lab…"></textarea>
+      </div>
+      <a class="btn" href="mailto:philip.king@maine.edu" style="width:100%;text-align:center;display:block;">Send Message</a>
+      <p class="form-note">Or email directly at philip.king@maine.edu — we typically respond within a few days.</p>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    <p>&copy; 2025 KING Manufacturing Lab | University of Maine</p>
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <img src="UMaine_logo_dark_blue.png" alt="University of Maine" />
+    <span class="footer-text">© 2026 KING Manufacturing Lab · University of Maine</span>
+  </div>
+  <a href="https://umaine.edu/mecheng/" target="_blank">Department of Mechanical Engineering</a>
+</footer>
+
 </body>
 </html>
